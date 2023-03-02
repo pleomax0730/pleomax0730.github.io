@@ -14,39 +14,40 @@ lang: en
 
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone:
+timezone: Asia/Taipei
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy                          # the main title
+title: Vincent For ML                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: Notes on my ML journey   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+  Welcome to Vincent For ML! Here, I'll share my insights on machine learning and some MLOps. As a ML and software engineer, I'll explore the latest technologies and techniques in these fields. Join me on this journey of discovery!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ''
+url: 'https://pleomax0730.github.io'
 
 github:
-  username: github_username             # change to your github username
+  username: pleomax0730             # change to your github username
 
 twitter:
-  username: twitter_username            # change to your twitter username
+  username: pleomax_wu            # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com             # change to your email address
+  name: Vincent Wu
+  email: pleomax0730@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://twitter.com/pleomax_wu      # change to your twitter homepage
+    - https://github.com/pleomax0730       # change to your github homepage
+    - https://www.linkedin.com/in/%E6%96%87%E5%AE%8F-%E5%90%B3-334798117/
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+
 
 google_site_verification:               # fill in to your verification string
 
@@ -81,7 +82,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://pbs.twimg.com/profile_images/1326462855248371713/lDmrpjhA_400x400.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
