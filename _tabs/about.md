@@ -16,7 +16,7 @@ I've created this blog to share my ML experience with others and to learn from o
 
 ## Publication
 
-[Performance Improvement on Traditional Chinese Task-Oriented Dialogue Systems with Reinforcement Learning and Regularized Dropout Technique](https://ieeexplore.ieee.org/document/10052671)
+- [Performance Improvement on Traditional Chinese Task-Oriented Dialogue Systems with Reinforcement Learning and Regularized Dropout Technique](https://ieeexplore.ieee.org/document/10052671)
 
 ***
 
@@ -24,16 +24,16 @@ I've created this blog to share my ML experience with others and to learn from o
 
 ### Machine Learning
 
-Huggingface Transformers, PyTorch, Scikit-Learn, TensorFlow/Keras, Weights & Bias, MLFlow
+- Huggingface Transformers, PyTorch, Scikit-Learn, TensorFlow/Keras, Weights & Bias, MLFlow
 
 ### Cloud
 
-AWS, Kubernetes, Docker, CircleCI
+- AWS, Kubernetes, Docker, CircleCI
 
 ### Others
 
-Flask, Django, FastAPI, Sentry, PostgreSQL, MySQL
+- Flask, Django, FastAPI, Sentry, PostgreSQL, MySQL
 
 ### Platform
 
-Windows, Linux
+- Windows, Linux
