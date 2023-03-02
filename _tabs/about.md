@@ -14,6 +14,12 @@ I've created this blog to share my ML experience with others and to learn from o
 
 ***
 
+## Publication
+
+[Performance Improvement on Traditional Chinese Task-Oriented Dialogue Systems with Reinforcement Learning and Regularized Dropout Technique](https://ieeexplore.ieee.org/document/10052671)
+
+***
+
 ## Technologies
 
 ### Machine Learning
