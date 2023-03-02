@@ -6,7 +6,7 @@ order: 1
 
 Hi, my name is Vincent, and I'm 27 years old, living in Taoyuan, Taiwan. I started studying machine learning four years ago, and I've been hooked ever since. I've explored a range of areas within the field, including natural language processing (NLP), reinforcement learning, and audio-related machine learning problems.
 
-Currently, I work as a machine learning engineer at a startup, where I use my expertise to solve text and audio-related problems. One of my key areas of focus is leveraging transformer models to build efficient and effective solutions. I've developed models that can perform tasks such as text classification, audio classification/regression, dereverberation, multimodal classification, and more.
+Currently, I work as a machine learning engineer at a startup, where I use my expertise to solve text and audio-related problems. I've been focusing on using transformer models to create solutions that are both efficient and effective that can perform tasks such as text classification, audio classification/regression, dereverberation, multimodal classification, and more.
 
 Once we've developed our models and served them using Flask or Django frameworks, we containerize and deploy them to Kubernetes or AWS EC2 using CircleCI.
 
