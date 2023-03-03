@@ -8,7 +8,7 @@ Hi, my name is Vincent, and I'm 27 years old, living in Taoyuan, Taiwan. I start
 
 I worked as a machine learning engineer at a startup, where I use my expertise to solve text and audio-related problems. I've been focusing on using transformer models to create solutions that can perform tasks such as text classification/generation, audio classification/regression,  multimodal classification, and more.
 
-Once we've developed our models and served them using Flask or Django frameworks, we'll perform pressure test or inference latency test. Finally, we containerize and deploy them to Kubernetes or AWS EC2 using CircleCI.
+Once we've developed our models and served them using Flask or Django frameworks, we'll perform pressure test or inference latency test and quantize our model if needed. Finally, we containerize and deploy them to Kubernetes or AWS EC2 using CircleCI.
 
 I've created this blog to share my ML experience with others and to learn from the community. If you have any questions or would like to discuss potential collaborations, please feel free to reach out to me via [email](mailto:pleomax0730@gmail.com). I look forward to hearing from you!
 
