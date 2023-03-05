@@ -1,0 +1,134 @@
+---
+title: Dynamic Quantize Pytorch model
+date: 2023-03-05 16:25:00 -500
+categories: [ML]
+tags: [quantization, pytorch, pytorch lightning]
+---
+
+# Dynamic Quantize Pytorch model using Pytorch built-in function (part1)
+
+This is going to be a three parts tutorial, and we're going to quantize pytorch model with three different way. [Here's the source code of the first part tutorial](https://github.com/pleomax0730/Chinese-Tone-classification/blob/main/lightning/ptq_dynamic.py).
+
+- Built-in Pytorch function
+- Intel® Neural Compressor Library
+- ONNX Libary
+
+In this first part tutorial, we will discuss how to export a PyTorch Lightning model(or Pytorch model) using built-in Pytorch function to a quantized version and compare their performance.
+
+Quantization is a technique used to optimize deep learning models by reducing their memory requirements and preserving their performance on resource-limited environments. In this tutorial, we will use the PyTorch built-in quantization module to quantize a model and compare its performance with the original model.
+
+We will perform the following steps in this tutorial:
+
+1. [Load the PyTorch Lightning model](#step-1-load-the-pre-trained-pytorch-model)
+2. [Quantize the model](#step-2-quantize-the-model)
+3. [Compare the sizes of the original and quantized models](#step-3-compare-the-sizes-of-the-original-and-quantized-models)
+4. [Evaluate the performance of the original and quantized models](#step-4-evaluate-the-performance-of-the-original-and-quantized-models)
+5. [Summary](#summary)
+
+Let's get started.
+
+## Step 1: Load the pre-trained PyTorch model
+
+We will use a tone classification model, which is a multiclass classification problem with 5 output classes representing the tones in Mandarin Chinese.
+
+We will use the `LightningToneClassifier` model from the `tone_pl_model.py` file.
+
+```python=
+import torch
+from tone_pl_model import LightningToneClassifier
+
+checkpoint = "/home/vincent0730/ML_chinese_tone_classification/87/a8/epoch=0-val_loss=1.250-val_acc=0.521.ckpt"
+pl_model = LightningToneClassifier.load_from_checkpoint(checkpoint)
+model = pl_model.model
+model.eval()
+```
+
+In the above code, we load the pre-trained model from a checkpoint file and set its mode to evaluation.
+
+## Step 2: Quantize the model
+
+We will use the `torch.quantization.quantize_dynamic` function to quantize the model. This function applies dynamic quantization to all linear and convolutional layers of the model.
+
+```python=
+quantized_model = torch.quantization.quantize_dynamic(
+    model,
+    {torch.nn.Linear},
+    dtype=torch.qint8,
+)
+```
+
+In the above code, we quantize the model using dynamic quantization and specify that only linear layers should be quantized. We also specify the datatype of the quantized model as `torch.qint8`.
+
+## Step 3: Compare the sizes of the original and quantized models
+
+We use the helper function `print_size_of_model` to compare the sizes of the original and quantized models.
+
+```python=
+import os
+
+def print_size_of_model(model):
+    torch.save(model.state_dict(), "temp.p")
+    print("Size (MB):", os.path.getsize("temp.p") / (1024 * 1024))
+    os.remove("temp.p")
+
+print_size_of_model(model)
+print_size_of_model(quantized_model)
+```
+
+In the above code, we use the print_size_of_model function to print the sizes of the original and quantized models. The function saves the model to a temporary file, computes its size, and then deletes the file.
+
+## Step 4: Evaluate the performance of the original and quantized models
+
+To evaluate the performance of both the original and quantized models, we'll use a validation dataset consisting of one thousand data points. We'll also use the `Accuracy` metric from `torchmetrics` to compute the accuracy of the models.
+
+```python=
+import time
+from torchmetrics import Accuracy
+from tqdm import tqdm
+from tone_datamodule import ToneDataModule
+
+acc = Accuracy(task="multiclass", num_classes=5)
+eval_metadata = "/home/vincent0730/ML_chinese_tone_classification/test1000.csv"
+max_length = 75
+batch_size = 128
+datamodule = ToneDataModule(
+    train_metadata="",
+    eval_metadata=eval_metadata,
+    model_name_or_path="MIT/ast-finetuned-audioset-10-10-0.4593",
+    max_length=max_length,
+    batch_size=batch_size,
+)
+valid_dataset = datamodule.get_dataset(datamodule.eval_metadata, streaming=False)
+datamodule.val_dataset = valid_dataset
+```
+
+Let's define a helper function to compare their accuracy.
+
+```python=
+def model_runtime(model):
+    preds = []
+    labels = []
+    start = time.time()
+    for data in tqdm(datamodule.val_dataloader()):
+        pred = torch.argmax(model(data["input_values"]).logits, dim=-1).tolist()
+        preds.extend(pred)
+        labels.extend(data["labels"].tolist())
+    print(f"Total time: {time.time() - start}s")
+    print("Accuracy:", acc(torch.tensor(preds), torch.tensor(labels)))
+
+model_runtime(model)
+model_runtime(quantized_model)
+```
+
+## Summary
+
+The table below summarizes the results of the evaluation:
+
+| Model Type      | Size (MB) | Accuracy | Latency(s) |
+|-----------------|-----------|----------|------------|
+| Original Model  | 325.53    | 0.521    | 114.7      |
+| Quantized Model | 82.58     | 0.516    | 92.2       |
+
+As we can see, the quantized model is 74% smaller in size than the original model while having a slightly lower accuracy of around 0.5%.
+
+Although we have a minor drop in accuracy, it's important to note that the extent of accuracy reduction may vary depending on the model architecture and the dataset we used.
