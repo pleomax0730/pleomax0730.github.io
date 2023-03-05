@@ -47,7 +47,7 @@ In the above code, we load the pre-trained model from a checkpoint file and set 
 
 ## Step 2: Quantize the model
 
-We will use the `torch.quantization.quantize_dynamic` function to quantize the model. This function applies dynamic quantization to all linear and convolutional layers of the model.
+We will use the `torch.quantization.quantize_dynamic` function to quantize the model. This function applies dynamic quantization to all linear layers of the model.
 
 ```python=
 quantized_model = torch.quantization.quantize_dynamic(
