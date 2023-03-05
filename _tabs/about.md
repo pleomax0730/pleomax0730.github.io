@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 1
 ---
 
 Hi, my name is Vincent, and I'm 27 years old, living in Taoyuan, Taiwan. I started studying machine learning four years ago, and I've been hooked ever since. I've explored a range of areas within the field, including natural language processing (NLP), reinforcement learning, and audio-related machine learning problems.
